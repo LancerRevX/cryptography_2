@@ -2,6 +2,8 @@ import tkinter as tk
 from gcd_frame import GcdFrame
 from inversion_frame import InversionFrame
 from mod_exp_frame import ModExpFrame
+from diffie_hellman_frame import DiffieHellmanFrame
+from rsa_frame import RsaFrame
 
 
 class CryptographyInterface(tk.Tk):
@@ -20,6 +22,8 @@ class CryptographyInterface(tk.Tk):
         self.gcd_frame = GcdFrame(self)
         self.inversion_frame = InversionFrame(self)
         self.mod_exp_frame = ModExpFrame(self)
+        self.rsa_frame = RsaFrame(self)
+        self.diffie_hellman_frame = DiffieHellmanFrame(self)
 
         self.main_frame = tk.Frame()
         tk.Button(
@@ -37,12 +41,22 @@ class CryptographyInterface(tk.Tk):
             text='Возведение в степень по модулю',
             command=lambda: self.switch_to_frame(self.mod_exp_frame)
         ).pack()
+        tk.Button(
+            self.main_frame,
+            text='Шифрование RSA',
+            command=lambda: self.switch_to_frame(self.rsa_frame)
+        ).pack()
+        tk.Button(
+            self.main_frame,
+            text='Алгоритм ключевого обмена Диффи-Хеллмана',
+            command=lambda: self.switch_to_frame(self.diffie_hellman_frame)
+        ).pack()
 
-        self.current_frame = self.main_frame
-        self.switch_to_frame(self.main_frame)
+        self.current_frame = (self.main_frame, self.rsa_frame)[1]
+        self.switch_to_frame(self.current_frame)
 
         self.resizable(False, False)
-        self.wm_attributes('-toolwindow', 'True')
+        # self.wm_attributes('-toolwindow', 'True')
 
     def switch_to_frame(self, frame):
         self.current_frame.grid_remove()

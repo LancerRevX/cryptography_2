@@ -1,7 +1,7 @@
 from typing import Optional
 
 
-def gcd(a: int, b: int) -> Optional[tuple[int, int, int]]:
+def gcd(a: int, b: int) -> Optional[tuple[int, int, int]]:  # наибольший общий делитель
     if min(a, b) < 0:
         raise ValueError('a and b must be greater then zero')
     if a < b:

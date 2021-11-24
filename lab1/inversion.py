@@ -1,7 +1,7 @@
 from .gcd import gcd
 
 
-def inversion(e: int, z: int) -> int:
+def inversion(e: int, z: int) -> int:  # инверсия по модулю
     if gcd(e, z)[0] != 1:
         raise ValueError('e and z must be mutually simple')
     u = (z, 0)
