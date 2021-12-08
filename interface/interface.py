@@ -4,6 +4,7 @@ from inversion_frame import InversionFrame
 from mod_exp_frame import ModExpFrame
 from diffie_hellman_frame import DiffieHellmanFrame
 from rsa_frame import RsaFrame
+from shamir_frame import ShamirFrame
 
 
 class CryptographyInterface(tk.Tk):
@@ -24,6 +25,7 @@ class CryptographyInterface(tk.Tk):
         self.mod_exp_frame = ModExpFrame(self)
         self.rsa_frame = RsaFrame(self)
         self.diffie_hellman_frame = DiffieHellmanFrame(self)
+        self.shamir_frame = ShamirFrame(self)
 
         self.main_frame = tk.Frame()
         tk.Button(
@@ -51,8 +53,13 @@ class CryptographyInterface(tk.Tk):
             text='Алгоритм ключевого обмена Диффи-Хеллмана',
             command=lambda: self.switch_to_frame(self.diffie_hellman_frame)
         ).pack()
+        tk.Button(
+            self.main_frame,
+            text='Протокол Шамира',
+            command=lambda: self.switch_to_frame(self.shamir_frame)
+        ).pack()
 
-        self.current_frame = (self.main_frame, self.rsa_frame)[1]
+        self.current_frame = (self.main_frame, self.rsa_frame, self.shamir_frame)[2]
         self.switch_to_frame(self.current_frame)
 
         self.resizable(False, False)
