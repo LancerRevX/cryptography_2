@@ -5,6 +5,7 @@ from mod_exp_frame import ModExpFrame
 from diffie_hellman_frame import DiffieHellmanFrame
 from rsa_frame import RsaFrame
 from shamir_frame import ShamirFrame
+from elgamal_frame import ElgamalFrame
 
 
 class CryptographyInterface(tk.Tk):
@@ -26,6 +27,7 @@ class CryptographyInterface(tk.Tk):
         self.rsa_frame = RsaFrame(self)
         self.diffie_hellman_frame = DiffieHellmanFrame(self)
         self.shamir_frame = ShamirFrame(self)
+        self.elgamal_frame = ElgamalFrame(self)
 
         self.main_frame = tk.Frame()
         tk.Button(
@@ -58,8 +60,13 @@ class CryptographyInterface(tk.Tk):
             text='Протокол Шамира',
             command=lambda: self.switch_to_frame(self.shamir_frame)
         ).pack()
+        tk.Button(
+            self.main_frame,
+            text='Шифр Эль-Гамаля',
+            command=lambda: self.switch_to_frame(self.elgamal_frame)
+        ).pack()
 
-        self.current_frame = (self.main_frame, self.rsa_frame, self.shamir_frame)[2]
+        self.current_frame = (self.main_frame, self.rsa_frame, self.elgamal_frame)[2]
         self.switch_to_frame(self.current_frame)
 
         self.resizable(False, False)
