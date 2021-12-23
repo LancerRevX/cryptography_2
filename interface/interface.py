@@ -6,6 +6,7 @@ from diffie_hellman_frame import DiffieHellmanFrame
 from rsa_frame import RsaFrame
 from shamir_frame import ShamirFrame
 from elgamal_frame import ElgamalFrame
+from md5_frame import Md5Frame
 
 
 class CryptographyInterface(tk.Tk):
@@ -28,6 +29,7 @@ class CryptographyInterface(tk.Tk):
         self.diffie_hellman_frame = DiffieHellmanFrame(self)
         self.shamir_frame = ShamirFrame(self)
         self.elgamal_frame = ElgamalFrame(self)
+        self.md5_frame = Md5Frame(self)
 
         self.main_frame = tk.Frame()
         tk.Button(
@@ -65,8 +67,13 @@ class CryptographyInterface(tk.Tk):
             text='Шифр Эль-Гамаля',
             command=lambda: self.switch_to_frame(self.elgamal_frame)
         ).pack()
+        tk.Button(
+            self.main_frame,
+            text='Хеш-функция MD5',
+            command=lambda: self.switch_to_frame(self.md5_frame)
+        ).pack()
 
-        self.current_frame = (self.main_frame, self.rsa_frame, self.elgamal_frame)[2]
+        self.current_frame = (self.main_frame, self.rsa_frame, self.elgamal_frame)[0]
         self.switch_to_frame(self.current_frame)
 
         self.resizable(False, False)
