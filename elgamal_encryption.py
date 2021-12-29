@@ -30,6 +30,12 @@ def generate_g(p: int, start_g: int = 0) -> int:
         g += 1
 
 
+def generate_k(p: int) -> int:
+    if not isprime(p):
+        raise InvalidPError
+    return randint(2, p-2)
+
+
 def generate_private_key(p):
     if not isprime(p):
         raise InvalidPError
