@@ -28,7 +28,7 @@ def create_keys(p: int, q: int, e: int) -> tuple[tuple[int, int], tuple[int, int
     return public_key, private_key
 
 
-def encode(key: tuple[int, int], message: str) -> str:
+def encode_text(key: tuple[int, int], message: str) -> str:
     if not key[0] >= 1 or not key[1] >= 1:
         raise NumberNotNaturalError
     result = ''
@@ -39,3 +39,11 @@ def encode(key: tuple[int, int], message: str) -> str:
         m = mod_exp(m, key[0], key[1])
         result += chr(m)
     return result
+
+
+def encode_int(key: tuple[int, int], message: int) -> int:
+    if not key[0] >= 1 or not key[1] >= 1:
+        raise NumberNotNaturalError
+    if not 0 <= message < key[1]:
+        raise InvalidMessage
+    return mod_exp(message, key[0], key[1])

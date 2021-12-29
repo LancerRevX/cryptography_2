@@ -12,12 +12,12 @@ class TestRsa(TestCase):
         self.assertEqual((self.public_key_1, self.private_key_1), rsa.create_keys(17, 599, 11))
 
     def test_encrypt(self):
-        self.assertRaises(rsa.exceptions.InvalidMessage, rsa.encode, (17, 26), 'ы')
+        self.assertRaises(rsa.exceptions.InvalidMessage, rsa.encode_text, (17, 26), 'ы')
         self.assertEqual(
             'hello',
-            rsa.encode(
+            rsa.encode_text(
                 self.public_key_1,
-                rsa.encode(
+                rsa.encode_text(
                     self.private_key_1,
                     'hello'
                 )))
@@ -25,17 +25,17 @@ class TestRsa(TestCase):
     def test_decrypt(self):
         self.assertEqual(
             'hello',
-            rsa.encode(
+            rsa.encode_text(
                 self.private_key_1,
-                rsa.encode(
+                rsa.encode_text(
                     self.public_key_1,
                     'hello'
                 )))
         self.assertEqual(
             'привет',
-            rsa.encode(
+            rsa.encode_text(
                 self.private_key_1,
-                rsa.encode(
+                rsa.encode_text(
                     self.public_key_1,
                     'привет'
                 )))

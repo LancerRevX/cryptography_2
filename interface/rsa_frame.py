@@ -1,5 +1,5 @@
 import tkinter as tk
-from rsa import create_keys, encode, exceptions, generate_e
+from rsa import create_keys, encode_text, exceptions, generate_e
 from tkinter.messagebox import showerror
 
 
@@ -73,7 +73,7 @@ class RsaFrame(tk.Frame):
         try:
             public_key = (self.public_key[0].get(), self.public_key[1].get())
             text = self.text.get('1.0', 'end')[:-1]
-            encrypted_text = encode(public_key, text)
+            encrypted_text = encode_text(public_key, text)
             self.encrypted_text.delete('1.0', tk.END)
             self.encrypted_text.insert(tk.END, encrypted_text)
         except exceptions.NumberNotNaturalError:
@@ -85,7 +85,7 @@ class RsaFrame(tk.Frame):
         try:
             private_key = (self.private_key[0].get(), self.private_key[1].get())
             encrypted_text = self.encrypted_text.get('1.0', 'end')[:-1]
-            decrypted_text = encode(private_key, encrypted_text)
+            decrypted_text = encode_text(private_key, encrypted_text)
             self.text.delete('1.0', tk.END)
             self.text.insert(tk.END, decrypted_text)
         except exceptions.NumberNotNaturalError:
